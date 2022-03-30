@@ -8,7 +8,7 @@ from filters import filter_dataset
 def page2(data, countries):
     
     #define sidebar sliders
-    select_country = st.sidebar.multiselect("Select the countries you want to visualize: ", countries, default = ["Spain","Germany","Greece","Italy", "Switzerland"])
+    select_country = st.sidebar.multiselect("Select the countries you want to visualize: ", countries, default = ["Spain","Germany","Belgium","Italy", "Switzerland"])
     select_year = st.sidebar.slider(label = "Select the year", min_value=2010, max_value=2019, value=2019, step=1)
      
     #select data from the dataset
@@ -46,7 +46,7 @@ def page2(data, countries):
 
     bars1 = alt.Chart(maternal_leave).mark_bar().encode(
     y='Country:N',
-    x='Value:Q',
+    x=alt.X('Value:Q', scale=alt.Scale(domain=[0, 25])),
     color=alt.Color("Country:N"),
     opacity = alt.condition(click, alt.value(1), alt.value(0.2)) ,
     tooltip=['Country', 'Value'] 
@@ -75,7 +75,7 @@ def page2(data, countries):
 
     bars2 = alt.Chart(paternal_leave).mark_bar().encode(
         y='Country:N',
-        x='Value:Q',
+        x= alt.X('Value:Q', scale=alt.Scale(domain=[0, 25])),
         color=alt.Color("Country:N", legend=alt.Legend(title="Country")),
         opacity = alt.condition(click, alt.value(1), alt.value(0.2)),
         tooltip=['Country', 'Value']   
