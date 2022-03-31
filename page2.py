@@ -99,8 +99,11 @@ def page2(df,df1, countries):
     select_country = st.sidebar.selectbox("Select the country you want to visualize", countries, index  = countries.index("France"))
 
     mapgraph = maps(df1,select_indicator,select_year)
+    st.markdown("# Women in Decision Making")
+    st.markdown("Let's investigate the role of women in decision making. Indeed, there is a positive relationship between the number of women in powerful positions and the impact that they have on laws and regulations concerning the disparity in wages. It is possible to visualize 3 different indicators thanks to the dropdown menu on the side: Share of Female Managers, Share of Female Holding Board seats and Share of Women having seats in Parliaments. Moreover, you can slide through the years to see the changes in this percentage across EU over the decade(2010-2019) on the left.")
     st.markdown(f"## {indicators[select_indicator]} ")
     st.altair_chart(mapgraph,use_container_width = True)
+    st.markdown("In the following infographic you can visualize the same indicator for one specific country.")
     st.markdown(f"### {indicators[select_indicator]} in {select_country}")
     col1, col2 = st.columns([3,1])
     graph, percentage = infographic(df, select_indicator, select_country, select_year)

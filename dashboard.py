@@ -21,8 +21,12 @@ if __name__ == '__main__':
     page = st.select_slider('Navigate across the pages',['Homepage', 'Page 1', 'Page 2'])
     
     if page == 'Homepage':
-        st.markdown("## Gender Equality in Employment in Europe \nTeam: PowerPuff Girl")
+        st.markdown("## Gender Equality in Employment in Europe \nTeam: PowerPuff Girl \nNevina Dalal, Chiara Palma, Basma Wehbe, Vivian Koutroumani")
         st.image("https://www.ilprimatonazionale.it/wp-content/uploads/2019/06/gender-gap.jpg")
+        st.markdown("Women's labor-force involvement has increased dramatically since the second half of the twentieth century. Women are working longer hours and enrolling in more higher education programs in increasing numbers. Despite this development, major income disparities between men and women remain, particularly for women of color.")
+        st.markdown("Go to the next page to discover more about wage gap and the reasons behing it.")
+        st.markdown(" ")
+        st.markdown("\n Data source: https://stats.oecd.org/")
     
     if page =="Page 1":
         st.markdown("# Woman in Decision Making")

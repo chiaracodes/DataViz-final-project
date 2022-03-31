@@ -121,5 +121,5 @@ def page1(data, countries_available):
         The goal in our opinion should be to give fathers and mothers the same possibilities in these terms, to allow women and men to dedicate an equal amount of time to new born childs. \
         Moreover, as fathers have an higher possibility to stay at home, it decreases the possibility that women will be penalized at work for a pregrancy.")
     
-    st.markdown("\n Source: https://stats.oecd.org/")
+    
 
