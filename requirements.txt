@@ -1,4 +1,3 @@
-absl-py @ file:///home/conda/feedstock_root/build_artifacts/absl-py_1637088766493/work
 alabaster @ file:///home/ktietz/src/ci/alabaster_1611921544520/work
 albumentations==1.1.0
 altair==4.2.0
