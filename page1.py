@@ -5,10 +5,10 @@ from filters import filter_dataset
 
 
 
-def page1(data, countries):
+def page1(data, countries_available):
     
     #define sidebar sliders
-    select_country = st.sidebar.multiselect("Select the countries you want to visualize: ", countries, default = ["Spain","Germany","Belgium","Italy", "Switzerland"])
+    select_country = st.sidebar.multiselect("Select the countries you want to visualize: ", countries_available, default = ["Spain","Germany","Belgium","Italy", "Switzerland"])
     select_year = st.sidebar.slider(label = "Select the year", min_value=2010, max_value=2019, value=2019, step=1)
      
     #select data from the dataset
