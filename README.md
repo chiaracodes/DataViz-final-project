@@ -1,3 +1,4 @@
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/chiaracodes/dataviz-final-project/main/dashboard.py)
 # DataViz-final-project
 Team: PowerPuff Girls
 
