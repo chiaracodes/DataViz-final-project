@@ -37,10 +37,13 @@ countries = ['Austria',
 def load_full_data():
     df = pd.read_csv("data.csv", index_col = 0)
     return df
-
+@st.cache
+def map_data():
+    df_map = pd.read_csv("data_with_id.csv",index_col = 0)
+    return df_map
 if __name__ == '__main__':
     df = load_full_data()
-
+    df1 = map_data()
     
     page = st.select_slider('Navigate across the pages',['Homepage', 'Page 1', 'Page 2'])
     
@@ -50,7 +53,7 @@ if __name__ == '__main__':
     
     if page =="Page 1":
         st.markdown("# Woman in Decision Making")
-        page1(df, countries)
+        page1(df,countries)
 
     if page == "Page 2":
-        page2(df, countries)
+        page2(df, df1,countries)
