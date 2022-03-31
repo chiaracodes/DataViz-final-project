@@ -1,9 +1,7 @@
 import altair as alt
-from numpy import True_
 import streamlit as st
 import pandas as pd
 from filters import filter_dataset
-from vega_datasets import data
 
 def compute_percentage(df, select_indicator, select_country,select_year):
     #select data from the dataset
@@ -21,30 +19,6 @@ def compute_percentage(df, select_indicator, select_country,select_year):
     percentage_male = 100-percentage_female
     
     return percentage_female, percentage_male
-
-def maps(df,select_indicator, select_year):
-
-    board_members = df.loc[(df.Indicator == select_indicator) & (df.Year ==select_year),:]
-
-    countries1 = alt.topo_feature(data.world_110m.url, 'countries')
-    map_chart = alt.Chart(board_members).mark_geoshape()\
-    .encode(color='Value:Q',
-            tooltip=['Country:N', 'Value:Q']
-           )\
-    .transform_lookup(
-        lookup='id',
-        from_=alt.LookupData(countries1, key='id',
-                             fields=["type", "properties", "geometry"])
-    )\
-    .project('mercator',
-         scale=300,
-         center=[20,50],
-         clipExtent= [[0, 0], [400, 300]])\
-    .properties(
-        width=500,
-        height=300
-    )
-    return map_chart
 
 def infographic(df, select_indicator, select_country, select_year):
         
@@ -84,7 +58,35 @@ def infographic(df, select_indicator, select_country, select_year):
         )
         return infographic, percentage_female
 
-def page1(df,df1, countries):
+def maps(df,select_indicator,select_year):
+
+    source = filter_dataset(df, index = select_indicator, year = select_year)
+    countries = alt.topo_feature(data.world_110m.url, 'countries')
+    map_chart = alt.Chart(source).mark_geoshape()\
+    .encode(color='Value:Q',
+            tooltip=['Country:N', 'Value:Q']
+           )\
+    .add_selection(select_year)\
+    .transform_filter(select_year)\
+    .add_selection(select_indicator)\
+    .transform_filter(select_indicator)\
+    .transform_lookup(
+        lookup='id',
+        from_=alt.LookupData(countries, key='id',
+                             fields=["type", "properties", "geometry"])
+    )\
+    .project('mercator',
+            scale=300,
+         center=[20,50],
+         clipExtent= [[0, 0], [400, 300]])\
+    .properties(
+        width=500,
+        height=300,
+        title='Europe Female Share of Seats'
+    )
+    return map_chart
+
+def page1(df, countries):
     indicators = {
     "EMP10": "Share of female managers", 
     "EMP17":"Female share of seats in national parliaments",
@@ -96,16 +98,15 @@ def page1(df,df1, countries):
     select_country = st.sidebar.selectbox("Select the country you want to visualize", countries, index  = countries.index("France"))
     select_year = st.sidebar.slider(label = "Select the year", min_value=2010, max_value=2019, value=2019, step=1)
     select_indicator = st.sidebar.selectbox("Indicator you would like to visualize", ind, format_func  = lambda x: indicators[x])
-    mapgraph = maps(df1,select_indicator,select_year)
-    st.markdown(f"### {indicators[select_indicator]} in {select_country}")
-    st.altair_chart(mapgraph,use_container_width = True)
     
+    st.markdown(f"### {indicators[select_indicator]} in {select_country}")
     col1, col2 = st.columns([3,1])
     graph, percentage = infographic(df, select_indicator, select_country, select_year)
-    mapgraph = maps(df1,select_indicator,select_year)
     col1.altair_chart(graph)
+    mapgraph = maps(df,select_indicator,select_year)
     percentage_female_lastyear = compute_percentage(df, select_indicator, select_country,select_year-1)[0] if select_year >2010 else 0
     delta = percentage-percentage_female_lastyear
     col2.markdown(f"Year : {select_year}")
     col2.metric(" ",str(percentage)+"%", delta)
     col2.markdown(f"with respect to {select_year-1}")
+    st.write(mapgraph)
