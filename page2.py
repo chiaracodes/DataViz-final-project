@@ -40,7 +40,7 @@ def maps(df,select_indicator, select_year):
          scale=300,
          center=[20,50]
         # clipExtent= [[0, 0], [400, 300]])\
-    .properties(
+    ).properties(
         width=500,
         height=300
     )
