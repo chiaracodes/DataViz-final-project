@@ -38,8 +38,8 @@ def maps(df,select_indicator, select_year):
     )\
     .project('mercator',
          scale=300,
-         center=[20,50],
-         clipExtent= [[0, 0], [400, 300]])\
+         center=[20,50]
+        # clipExtent= [[0, 0], [400, 300]])\
     .properties(
         width=500,
         height=300
