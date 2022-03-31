@@ -4,34 +4,6 @@ import altair as alt
 from page1 import page1
 from page2 import page2
 
-#pictures
-
-#countries available
-countries = ['Austria',
- 'Belgium',
- 'Czech Republic',
- 'Denmark',
- 'France',
- 'Germany',
- 'Greece',
- 'Hungary',
- 'Iceland',
- 'Ireland',
- 'Italy',
- 'Luxembourg',
- 'Netherlands',
- 'Norway',
- 'Poland',
- 'Portugal',
- 'Slovak Republic',
- 'Spain',
- 'Sweden',
- 'Switzerland',
- 'United Kingdom',
- 'Estonia',
- 'Slovenia',
- 'Latvia',
- 'Lithuania']
 
 @st.cache
 def load_full_data():
@@ -41,10 +13,11 @@ def load_full_data():
 def map_data():
     df_map = pd.read_csv("data_with_id.csv",index_col = 0)
     return df_map
+
 if __name__ == '__main__':
     df = load_full_data()
     df1 = map_data()
-    
+    countries = list(df.Country.unique())
     page = st.select_slider('Navigate across the pages',['Homepage', 'Page 1', 'Page 2'])
     
     if page == 'Homepage':
