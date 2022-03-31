@@ -1,5 +1,5 @@
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/chiaracodes/dataviz-final-project/main/dashboard.py)
-# DataViz-final-project
+# Visualization of Gender Equality in Employment in Europe
 Team: PowerPuff Girls
 ![Gender Inequality](https://www.ilprimatonazionale.it/wp-content/uploads/2019/06/gender-gap.jpg)
 This is the final project for the Data Visualization course taught by Dr. Tobias Isenberg at CentraleSupeléc in 2022.
